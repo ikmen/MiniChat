@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+    </head>
+    <body>
+        <h1 id="name"></h1>
+        <ul id="chat">
+            {% for message in text %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        <form id="message">
+            <input type="text" id="text-input">
+            <input type="submit">
+        </form>
+
+        <form id="add-channel">
+            <input type="text" id="channel-input">
+            <input type="submit" value="new channel">
+        </form>
+        <div id="channels">
+            {% for channel in channels.keys() %}
+                <button data-channel="{{ channel }}" class="channel">{{ channel }}</button>
+            {% endfor %}
+        </div>
+    </body>
+</html>
