@@ -33,7 +33,6 @@ def message(data):
 
 @socketio.on("add channel")
 def channel(data):
-    # maybe add check if channel exists
     channels[data["channel"]] = []
     emit("broadcast channel", {"channel":data["channel"]}, broadcast=True)
 
