@@ -1,0 +1,60 @@
+body {
+    background-color: rgb(51, 51, 51);
+}
+
+.channel {
+    width: 80%;
+    color: white;
+    background-color: rgb(60,60,60);
+    border: none;
+}
+
+.channel:hover {
+    background-color: rgb(51, 51, 51);
+}
+
+#channel-list {
+    padding-bottom: 50%;
+    text-align: center;
+}
+
+#left-side {
+    background-color: rgb(60,60,60);
+}
+
+#user-info {
+    color: white;
+    text-align: center;
+}
+
+#add-channel {
+    text-align: center;
+}
+
+#add-channel input[type=text] {
+    width: 75%;
+}
+
+#add-channel input[type=submit] {
+    width: 25%;
+}
+
+#chat {
+    height: 80%;
+    background-color: rgb(60,60,60);
+    list-style-type: none;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#chat li {
+    color: white;
+}
+
+#message input[type=text] {
+    width: 75%;
+}
+
+#message input[type=submit] {
+    width: 24%;
+}
