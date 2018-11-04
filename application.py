@@ -12,13 +12,13 @@ text = []
 channels = {"number one" : [], "number two" : []}
 
 class Message:
-    def __init__(self, message, data, user, channel):
+    def __init__(self, message, date, user, channel):
         self.message = message
-        self.data = data
+        self.date = date
         self.user = user
         self.channel = channel
     def getDict(self):
-        return {"message": self.message, "data": self.data, "user": self.user, "channel": self.channel}
+        return {"message": self.message, "date": self.date, "user": self.user, "channel": self.channel}
 
 @app.route("/")
 def index():
@@ -26,10 +26,10 @@ def index():
 
 @socketio.on("got message")
 def message(data):
-    message = Message(data["text"], data["time"], data["name"], "")
+    message = Message(data["message"], data["date"], data["user"], "")
     # might not need jsonify
     channels[data["channel"]].append(message.getDict())
-    emit("add message", {"text":data["text"],"time": data["time"], "name": data["name"]}, broadcast=True)
+    emit("add message", {"message":data["message"],"date": data["date"], "user": data["user"]}, broadcast=True)
 
 @socketio.on("add channel")
 def channel(data):

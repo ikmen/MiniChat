@@ -1,28 +1,49 @@
 <html>
-    <head>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
-        <script src="{{ url_for('static', filename='index.js') }}"></script>
-    </head>
-    <body>
-        <h1 id="name"></h1>
-        <ul id="chat">
-            {% for message in text %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        <form id="message">
-            <input type="text" id="text-input">
-            <input type="submit">
-        </form>
 
-        <form id="add-channel">
-            <input type="text" id="channel-input">
-            <input type="submit" value="new channel">
-        </form>
-        <div id="channels">
-            {% for channel in channels.keys() %}
-                <button data-channel="{{ channel }}" class="channel">{{ channel }}</button>
-            {% endfor %}
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="static/stylesheet.css">
+</head>
+
+<body>
+    <div class="row" id="main">
+        <div class="col-3" id="left-side">
+
+            <div id="user-info">
+                <h1 id="nickname">Tumen</h1>
+            </div>
+
+            <div id="channel-list">
+                
+            </div>
+
+            <form id="add-channel" class="container">
+                <input type="text" id="channel-name-input" placeholder="Enter channel">
+                <button type="submit">Submit</button>
+            </form>
+
         </div>
-    </body>
+
+        <div class="col-6" id="center">
+            <ul id="chat" class="container">
+                <li>Hello</li>
+                <li>My name is Tumen</li>
+            </ul>
+            <form id="message">
+                <input type="text" id="text-input">
+                <input type="submit">
+            </form>
+        </div>
+
+        <div class="col-3">
+            <h1>Users on channel is not implemented</h1>
+        </div>
+
+    </div>
+</body>
+
 </html>

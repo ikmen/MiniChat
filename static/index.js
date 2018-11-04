@@ -1,16 +1,5 @@
 if (!localStorage.getItem('name')) {
     localStorage.setItem('name', '');
-    /* var dos = document.createElement('form');
-    var text = document.createElement('input');
-    text.setAttribute('type', "text");
-    var submit = document.createElement('input');
-    submit.setAttribute('type', 'submit');
-    dos.appendChild(text);
-    dos.appendChild(submit);
-    var message = document.createElement('div');
-    message.innerHTML = 'You need to input name into the form';
-    document.appendChild(dos);
-    document.appendChild(message); */
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
             message.parentNode.removeChild(message);
             dos.parentNode.removeChild(dos);
 
-            document.getElementById('name').innerHTML = username;
+            document.getElementById('nickname').innerHTML = username;
             return false;
         };
     } else {
-        document.getElementById('name').innerHTML = username;
+        document.getElementById('nickname').innerHTML = username;
     };
 
 
@@ -60,18 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('connect', () => {
         document.getElementById('message').onsubmit = () => {
-            var text = document.getElementById('text-input').value;
+            var message = document.getElementById('text-input').value;
             document.getElementById('text-input').value = '';
-            var time = new Date().toLocaleTimeString();
-            socket.emit('got message', {'text': text, 'channel': current_channel, 'time': time, 'name': username});
+            var date = new Date().toLocaleTimeString();
+            socket.emit('got message', {'message': message, 'channel': current_channel, 'date': date, 'user': username});
             return false;
         };
     });
 
     socket.on('connect', () => {
         document.getElementById('add-channel').onsubmit = () => {
-            var new_channel = document.getElementById('channel-input').value;
-            document.getElementById('channel-input').value = '';
+            var new_channel = document.getElementById('channel-name-input').value;
+            document.getElementById('channel-name-input').value = '';
             socket.emit('add channel', {'channel': new_channel});
             return false;
         };
@@ -80,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('add message', (data) => {
         const li = document.createElement('li');
         var time = new Date().toLocaleTimeString();
-        li.innerHTML = `${data.time} ${data.name}: ${data.text}`;
+        li.innerHTML = createMessage(data);
         document.querySelector('#chat').append(li);
     });
 
@@ -90,13 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
         channel_button.setAttribute('class', "channel");
         channel_button.innerText = data.channel;
         addChannelListener(channel_button);
-        document.getElementById('channels').appendChild(channel_button);
+        document.getElementById('channel-list').appendChild(channel_button);
     });
 
     document.querySelectorAll('.channel').forEach(button => addChannelListener(button));
 
     function createMessage(message) {
-        return `${message["data"]}${message["user"]}${message["message"]}`;
+        return `${message["date"]} ${message["user"]} ${message["message"]}`;
     }
 
     function addChannelListener(channel_button) {
